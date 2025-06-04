@@ -3,4 +3,85 @@
     padding: 10px; /* Add some padding for better appearance */
     font-size: 16px; /* Adjust font size */
     border: 1px solid #ccc; /* Add a border */
-  }
+    border-radius: 4px; /* Material Design rounded corners */
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20); /* Material Design shadow */
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1); /* Smooth transition for focus */
+}
+
+textarea.text-input {
+    height: 100px;
+    margin-bottom: 10px;;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #3f51b5; /* Material Design primary color on focus */
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.20); /* Larger shadow on focus */
+}
+
+.material-button {
+    background-color: #3f51b5; /* Material Design primary color */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20); /* Material Design shadow */
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1); /* Smooth transition for hover/active */
+}
+
+.material-button:hover {
+    background-color: #303f9f; /* Darker shade on hover */
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.20); /* Larger shadow on hover */
+}
+
+.material-button:active {
+    background-color: #283593; /* Even darker shade on active */
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 4px 2px -1px rgba(0,0,0,0.20); /* Even larger shadow on active */
+}
+
+.bounding-rectangle {
+    border: 1px solid #d0d0d0; /* Slightly darker grey border */
+    border-radius: 8px; /* Slightly more rounded corners */
+    padding: 20px; /* Ample padding inside the box */
+    margin-bottom: 20px; /* Space below each experience entry */
+    margin-left: 10px; /* Space to the left */
+    margin-right: 10px; /* Space to the right */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Slightly more pronounced shadow for depth */
+    background-color: #f8f8f8; /* Lightly darkened background */
+}
+
+.bounding-rectangle h2,
+.bounding-rectangle h3 {
+    padding-top: 0; /* Remove top padding */
+    margin-top: 0; /* Ensure no extra margin at the top */
+}
+
+.outer-bounding-rectangle {
+    margin-top: 20px; 
+    margin-right: 20px;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    
+    padding-bottom: 5px;
+    background-color: #f0f0f0; /* A light background for the outer container */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px; /* Adjust as needed */
+}
+
+.pdf-download-container {
+    margin-left: auto; /* Pushes the button to the right */
+}
+
+span.padded {
+  margin-left: 20px;
+}

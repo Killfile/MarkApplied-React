@@ -76,21 +76,31 @@ const Resume = () => {
 
 
     return (
-        <div>
-            <h1>{data["company_name"]}</h1>
-            <h2>{data["title_name"]}</h2>
-            <div>
-                <a href={`http://localhost:5000/resume/render_as_pdf/${id}`}>[Download PDF]</a>
+        <div> <div className="outer-bounding-rectangle">
+            <div className="header-container">
+                <h1>{data["company_name"]}: {data["title_name"]}</h1>
+                <div className="pdf-download-container">
+                    <button className="material-button" onClick={() => window.open(`http://localhost:5000/resume/render_as_pdf/${id}`)}>
+                        Download PDF &#x1F4E5;
+                    </button>
+                </div>
             </div>
+           
+            <div className='bounding-rectangle'>
             <h2>Header</h2>
             <p>Name: {data && <JsonEditor jsonObject={data} path="name" onUpdate={handleUpdate} />}</p>
             <p>Title: {data && <JsonEditor jsonObject={data} path="title" onUpdate={handleUpdate} />}</p>
+            </div>
+            <div className='bounding-rectangle'>
             <h2>Summary</h2>
             <p>Location: {data && <JsonEditor jsonObject={data} path="summary.location" onUpdate={handleUpdate} />}</p>
             <p>Phone: {data && <JsonEditor jsonObject={data} path="summary.phone" onUpdate={handleUpdate} />}</p>
             <p>Email: {data && <JsonEditor jsonObject={data} path="summary.email" onUpdate={handleUpdate} />}</p>
             <p>Linkedin: {data && <JsonEditor jsonObject={data} path="summary.linkedin" onUpdate={handleUpdate} />}</p>
-            <p>Description: {data && <JsonEditor jsonObject={data} path="summary.description" onUpdate={handleUpdate} />}</p>
+            <p>Description: {data && <JsonEditor jsonObject={data} path="summary.description" onUpdate={handleUpdate} multiline={true}/>}</p>
+            </div>
+            </div>
+            <div className="outer-bounding-rectangle">
             <h1>Experience</h1>
             <h2>Primary Experience</h2>
             {exp_items != null ? exp_items : 'Exp Items Is Null'}
@@ -151,6 +161,7 @@ const Resume = () => {
                 <li>Implemented a prototype asynchronous Javascript based framework (later replaced with AJAX).</li>
 
             </ul>
+            </div>
 
             <h1>Education</h1>
 

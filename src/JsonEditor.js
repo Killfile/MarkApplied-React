@@ -97,20 +97,40 @@ class JsonEditor extends Component {
   render() {
     const { value, highlightedValue, isEditing } = this.state;
     const { path } = this.props;
+    const { multiline} = this.props;
 
     return (
       <span>
         {isEditing === path ? (
-          <span>
-            <input
-              type="text"
-              value={value}
-              onChange={this.handleChange}
-              placeholder={`Edit ${path}`}
-              className="text-input"
-            />
-            <button onClick={this.handleSave}>Save</button>
-          </span>
+          <div>
+            {multiline === true ? (
+              <div>
+                <div>
+                  <textarea
+                  value={value}
+                  onChange={this.handleChange}
+                  placeholder={`Edit ${path}`}
+                  spellCheck={true}
+                  className="text-input"
+                  />
+                </div>
+                <button onClick={this.handleSave} className='material-button'>Save</button>
+              </div>
+            ):(
+                <span>
+              <input
+                type="text"
+                value={value}
+                onChange={this.handleChange}
+                placeholder={`Edit ${path}`}
+                spellCheck={true}
+                className="text-input"
+              />
+              <button onClick={this.handleSave} className='material-button'>Save</button>
+              </span>
+              )}
+            
+          </div>
         ) : (
           <span onClick={this.handleEdit}>{highlightedValue}</span>
         )}
