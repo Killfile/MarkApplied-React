@@ -19,6 +19,24 @@ textarea.text-input {
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14), 0 1px 7px 0 rgba(0,0,0,0.12), 0 3px 1px -1px rgba(0,0,0,0.20); /* Larger shadow on focus */
 }
 
+div.flex-container {
+    display: flex;
+    align-items: left;
+    gap: 50px;
+}
+
+ul.horizontal-button-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    display: flex;
+    max-width: 500px;
+    min-width: 300px;
+    justify-content: space-between; /* Distribute items evenly */
+    align-items: center; /* Vertically center items */
+}
+
 .material-button {
     background-color: #3f51b5; /* Material Design primary color */
     color: white;

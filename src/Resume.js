@@ -6,7 +6,7 @@ import Experience from './Experience';
 
 const Resume = () => {
     const { id } = useParams();
-    const [exp_items, setExpItems] = useState()
+    const [exp_items, setExpItems] = useState([])
     const [data, setData] = useState('');
     useEffect(() => {
         const fetchData = async () => {
@@ -54,7 +54,7 @@ const Resume = () => {
     }
 
     const handleUpdate = async (updatedJson) => {
-        setData(updatedJson);
+        setData({...updatedJson});
         console.log('Updated JSON:', updatedJson);
    
         try {
@@ -69,10 +69,27 @@ const Resume = () => {
             console.log('Server Response:', result);
         } catch (error) {
             console.error('Error updating server:', error);
+            setData({ error: "Failed to load resume data" });
         }
    };
 
+   const rephrase_description = async () => {
 
+    try {
+      const response = await fetch(`http://localhost:5000/rephrase_summary/${id}`)
+      if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      const result = await response.json();
+      console.log('Server Response:', result);
+      const updatedJson = { ...data }; // create a copy
+      updatedJson["summary"]["description"] = result
+      setData(updatedJson)
+    } catch (error) {
+      console.error('Error rephrasing responsibilities:', error);
+    }
+
+    
+      
+  };
 
 
     return (
@@ -85,7 +102,13 @@ const Resume = () => {
                     </button>
                 </div>
             </div>
-           
+            {data.error && 
+                <div class="outer-bounding-rectangle">
+                    <p className="error">
+                        {data.error}
+                    </p>
+                </div>
+            }
             <div className='bounding-rectangle'>
             <h2>Header</h2>
             <p>Name: {data && <JsonEditor jsonObject={data} path="name" onUpdate={handleUpdate} />}</p>
@@ -97,7 +120,8 @@ const Resume = () => {
             <p>Phone: {data && <JsonEditor jsonObject={data} path="summary.phone" onUpdate={handleUpdate} />}</p>
             <p>Email: {data && <JsonEditor jsonObject={data} path="summary.email" onUpdate={handleUpdate} />}</p>
             <p>Linkedin: {data && <JsonEditor jsonObject={data} path="summary.linkedin" onUpdate={handleUpdate} />}</p>
-            <p>Description: {data && <JsonEditor jsonObject={data} path="summary.description" onUpdate={handleUpdate} multiline={true}/>}</p>
+            <p key="summary.description">Description: {data && <JsonEditor jsonObject={data} path="summary.description" onUpdate={handleUpdate} multiline={true} key={Date.now()}/>}</p>
+            <p><button onClick={rephrase_description} className='material-button'>Rephrase</button></p>
             </div>
             </div>
             <div className="outer-bounding-rectangle">
@@ -111,7 +135,7 @@ const Resume = () => {
             <p>Position: Lead Java Developer</p>
             <p>Dates: 03/2009 - 11/2009</p>
             <h4>Responsibilities</h4>
-            <RephraseButton url="/rephrase_company/41/Coral" />
+
             <ul>
 
                 <li>Built and demonstrated prototype cloud orchestration technology to investors.</li>
@@ -125,7 +149,7 @@ const Resume = () => {
             <p>Position: Senior Web Developer</p>
             <p>Dates: 04/2008 - 03/2009</p>
             <h4>Responsibilities</h4>
-            <RephraseButton url="/rephrase_company/41/SiteVision" />
+
             <ul>
 
                 <li>Extensive use of Javascript/AJAX, JSON, and XML based messaging for asynchronous communications.</li>
@@ -139,7 +163,6 @@ const Resume = () => {
             <p>Position: Technology Consultant</p>
             <p>Dates: 10/2007 - 04/2008</p>
             <h4>Responsibilities</h4>
-            <RephraseButton url="/rephrase_company/41/BearingPoint" />
             <ul>
 
                 <li>Tested and refactored/rearchitected MS-SQL database application to improve performance by ~400%.</li>
@@ -153,7 +176,6 @@ const Resume = () => {
             <p>Position: Sr Web Developer</p>
             <p>Dates: 12/2004 - 10/2007</p>
             <h4>Responsibilities</h4>
-            <RephraseButton url="/rephrase_company/41/Fingertip%20Marketing" />
             <ul>
 
                 <li>Highly test-oriented LAMP stack development with substantial database architecture responsibilities.</li>

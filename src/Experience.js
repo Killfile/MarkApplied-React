@@ -4,7 +4,17 @@ import JsonEditor from './JsonEditor';
 const Experience = ({ jsonObject, pathprefix, handleUpdate }) => { 
   const [responsibilities, setResponsibilities] = useState([]); // Holds the responsibilities array
   const skill_key = (pathprefix + ".skills").split('.');
-  const skills = skill_key.reduce((acc, key) => acc[key], jsonObject).join(', ');
+  const skills = skill_key.reduce((acc, key) => acc[key], jsonObject)
+
+
+
+  const skills_text = skills
+      .filter(skill => !responsibilities.some(
+        responsibility => responsibility.toLowerCase()
+          .includes(skill.toLowerCase())
+      ))
+      .join(', ');
+
 
   const responsibilities_keys = (pathprefix + ".responsibilities").split('.');
 
@@ -123,9 +133,17 @@ const Experience = ({ jsonObject, pathprefix, handleUpdate }) => {
       </p>
       <ul>{resp_items}</ul>
       <p> 
-        <button onClick={add_reponsibility} className='material-button'>Add Responsibility</button>
-        <button onClick={do_rephrase} className='material-button'>Rephrase</button> 
-        <span className='padded'>Skills: {skills}</span>
+        <div className='flex-container'>
+          <ul className='horizontal-button-list'>
+          <li><button onClick={add_reponsibility} className='material-button'>Add Responsibility</button></li>
+          <li><button onClick={do_rephrase} className='material-button'>Rephrase</button> </li>
+          </ul>
+          <div className='padded'>Unused skills: {skills_text}</div>
+        </div>
+        
+        
+        
+        
       </p>
     </div>
   );
