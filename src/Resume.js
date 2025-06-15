@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import './Resume.css';
 import JsonEditor from './JsonEditor';
 import Experience from './Experience';
+import Score from './score';
+import RephraseButton from './RephraseButton';
 
 const Resume = () => {
     const { id } = useParams();
@@ -43,15 +45,7 @@ const Resume = () => {
         }
     }, [data]);
 
-    function RephraseButton(props) {
-        function handleClick() {
-            window.open(props.url)
-        }
-
-        return (
-            <button onClick={handleClick}>Rephrase</button>
-        );
-    }
+    
 
     const handleUpdate = async (updatedJson) => {
         setData({...updatedJson});
@@ -73,10 +67,16 @@ const Resume = () => {
         }
    };
 
-   const rephrase_description = async () => {
-
+   const old_rephrase_description = async () => {
+    const body_json = {};
     try {
-      const response = await fetch(`http://localhost:5000/rephrase_summary/${id}`)
+      const response = await fetch(`http://localhost:5000/rephrase_summary/${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body_json),
+      });
       if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
       const result = await response.json();
       console.log('Server Response:', result);
@@ -97,9 +97,14 @@ const Resume = () => {
             <div className="header-container">
                 <h1>{data["company_name"]}: {data["title_name"]}</h1>
                 <div className="pdf-download-container">
+                    <div>
+                    <Score id={id}/>
+                    </div>
+                    <div>
                     <button className="material-button" onClick={() => window.open(`http://localhost:5000/resume/render_as_pdf/${id}`)}>
                         Download PDF &#x1F4E5;
                     </button>
+                    </div>
                 </div>
             </div>
             {data.error && 
@@ -121,7 +126,9 @@ const Resume = () => {
             <p>Email: {data && <JsonEditor jsonObject={data} path="summary.email" onUpdate={handleUpdate} />}</p>
             <p>Linkedin: {data && <JsonEditor jsonObject={data} path="summary.linkedin" onUpdate={handleUpdate} />}</p>
             <p key="summary.description">Description: {data && <JsonEditor jsonObject={data} path="summary.description" onUpdate={handleUpdate} multiline={true} key={Date.now()}/>}</p>
-            <p><button onClick={rephrase_description} className='material-button'>Rephrase</button></p>
+            <p>
+            <RephraseButton url={`http://localhost:5000/rephrase_summary/${id}`} onUpdate={(newDescription) => handleUpdate({ ...data, summary: { ...data.summary, description: newDescription } })} />
+                </p>
             </div>
             </div>
             <div className="outer-bounding-rectangle">

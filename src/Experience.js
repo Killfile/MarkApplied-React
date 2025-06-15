@@ -5,7 +5,7 @@ const Experience = ({ jsonObject, pathprefix, handleUpdate }) => {
   const [responsibilities, setResponsibilities] = useState([]); // Holds the responsibilities array
   const skill_key = (pathprefix + ".skills").split('.');
   const skills = skill_key.reduce((acc, key) => acc[key], jsonObject)
-
+  const [rephraseText, setRephraseText] = useState("Rephrase");
 
 
   const skills_text = skills
@@ -28,7 +28,7 @@ const Experience = ({ jsonObject, pathprefix, handleUpdate }) => {
   }, [jsonObject]);
 
   const do_rephrase = async () => {
-    
+    setRephraseText("Rephrasing...")
     let body_json = {}
     body_json["responsibilities"] = responsibilities
     body_json["skills"] = skills
@@ -64,6 +64,7 @@ const Experience = ({ jsonObject, pathprefix, handleUpdate }) => {
     } catch (error) {
       console.error('Error rephrasing responsibilities:', error);
     }
+    setRephraseText("Rephrase")
 
     
       
@@ -136,7 +137,7 @@ const Experience = ({ jsonObject, pathprefix, handleUpdate }) => {
         <div className='flex-container'>
           <ul className='horizontal-button-list'>
           <li><button onClick={add_reponsibility} className='material-button'>Add Responsibility</button></li>
-          <li><button onClick={do_rephrase} className='material-button'>Rephrase</button> </li>
+          <li><button onClick={do_rephrase} className='material-button'>{rephraseText}</button> </li>
           </ul>
           <div className='padded'>Unused skills: {skills_text}</div>
         </div>

@@ -103,3 +103,119 @@ ul.horizontal-button-list {
 span.padded {
   margin-left: 20px;
 }
+
+.scaled-text {
+    font-size: clamp(16px, 10vw, 100px); /* Scales between min and max */
+    margin: 0px;
+}
+
+.rephrase-button-group {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden; /* Ensures inner elements respect border-radius */
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.rephrase-button-group .material-button {
+    border-radius: 0; /* Remove individual button border-radius */
+    box-shadow: none; /* Remove individual button shadow */
+    margin: 0; /* Remove margin between buttons */
+}
+
+.rephrase-button-group .material-button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.rephrase-button-group .material-button:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.rephrase-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.score-button-group {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden; /* Ensures inner elements respect border-radius */
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.20);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.score-button-group .material-button {
+    border-radius: 0; /* Remove individual button border-radius */
+    box-shadow: none; /* Remove individual button shadow */
+    margin: 0; /* Remove margin between buttons */
+}
+
+.score-button-group .material-button:first-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.score-button-group .material-button:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Modal Styles */
+.modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.score-components {
+    margin-top: 15px;
+    padding-left: 20px;
+    border-left: 3px solid #ccc;
+}
+
+.score-components h3 {
+    margin-top: 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.score-components p {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #666;
+}
